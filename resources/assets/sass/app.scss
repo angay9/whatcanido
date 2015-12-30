@@ -1,0 +1,243 @@
+@import "public/lib/bootstrap/scss/bootstrap";
+@import "mixins/mixins";
+
+// Colors
+$gray: #393a4c;
+$gray-lighter: #424558;
+$gray-border: #515467;
+$color-light: #f3f3f3;
+$color-gray: #7e7f9b;
+$color-primary: #337ab7;
+$color-primary-darker: #2e6da4;
+$color-danger: #c9302c;
+$color-danger-darker: #ac2925;
+
+// Size vars
+$gutter: 25px;
+$block-height: 224px;
+
+// Reset
+html, body {
+    // height: 100%;
+}
+ul {
+    padding: 0;
+    margin: 0;
+    li {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+}
+
+input[type="text"].form-control,
+input[type="number"].form-control,
+textarea.form-control,
+input[type="text"].form-control:focus,
+input[type="number"].form-control:focus,
+textarea.form-control:focus {
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    border-bottom: 1px solid $color-gray;
+    outline: 0 none;
+    box-shadow: none;
+}
+
+.m-top-10 {
+    margin-top: 10px;
+}
+.m-bot-10 {
+    margin-bottom: 10px;
+}
+
+.m-top-20 {
+    margin-top: 20px;
+}
+.m-bot-20 {
+    margin-bottom: 20px;
+}
+
+.m-top-40 {
+    margin-top: 40px;
+}
+.m-bot-40 {
+    margin-bottom: 40px;
+}
+.text-gray {
+    color: $color-gray;
+}
+
+
+body.app {
+    padding: $gutter 0;
+    background-image: url('../img/background.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    font-family: Lato, Arial, sans-serif;
+}
+.fa-btn {
+    margin-right: 6px;
+}
+.fa-btn-right {
+    margin-left: 6px;
+}
+#app-container {
+    position: relative;
+    // height: 100%;
+}
+.sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 300px;
+    margin-right: $gutter;
+    margin: $gutter 0;
+    text-transform: uppercase;
+    color: $color-light;
+    a {
+        color: $color-light;
+        display: block;
+        padding: 10px 0;
+        -webkit-transition: padding .2s;
+        -moz-transition: padding .2s;
+        -o-transition: padding .2s;
+        transition: padding .2s;
+        &:hover, &:focus {
+            color: $color-light;
+            text-decoration: none;
+            padding-left: 10px;
+        }
+    }
+    .user-block {
+        text-align: center;
+        border-radius: inherit;
+    }
+    .user-menu, .user-block {
+        padding: 12px 30px;
+    }
+    .user-menu {
+        .menu-title {
+            color: $color-gray;
+        }
+        li {
+            &:not(.menu-title) {
+                border-bottom: 1px solid $color-gray;
+            }
+        }
+    }
+}
+.user-block,
+.content-block {
+    max-height: $block-height;
+    overflow: hidden;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+}
+.content {
+    width: 800px;
+    margin-left: 320px;
+    // height: 100%;
+    // overflow: hidden;
+    // padding: $gutter;
+    box-sizing: border-box;
+}
+.container-pad {
+    padding: $gutter !important;
+}
+.name {
+    display: block;
+    margin: 20px 0;
+    text-transform: uppercase;         
+}
+.sidebar, .content {
+    border-radius: 4px;
+}
+.gray-bg {
+    background: $gray;
+    color: $color-light;
+}
+.gray-lighter-bg {
+    background: $gray-lighter;
+}
+.event-desc {
+    padding: $gutter;
+    .avatar {
+        margin-top: -64px - $gutter;
+    }
+}
+
+.alert {
+    position: fixed;
+    top: $gutter;
+    right: 5px;
+    z-index: 2;
+    width: 400px;
+    color: #fff !important;
+    a {
+        color: $color-light;
+    }
+}
+
+// Helpers
+.bordered {
+    border: 5px solid rgba(255, 255, 255, .15);
+}
+.count {
+    font-size: 20px;
+}
+.fade-transition {
+    transition: opacity .3s ease;
+}
+.alert.alert-success, .alert.alert-info {
+    background-color: $color-primary;
+    border-color: $color-primary-darker;
+}
+.alert.alert-danger {
+    background-color: $color-danger;
+    border-color: $color-danger-darker;
+}
+
+// tabs
+.tab-controls {
+    border-bottom: 1px solid $color-gray;
+    & > a {
+        color: $color-light;
+        display: inline-block;
+        padding: 15px 25px;
+        // float: left;
+        &:focus, &:hover {
+            color: $color-light;
+            text-decoration: none;
+        }
+        &.active {
+            box-shadow: 0px 1px $color-primary;
+            border-bottom: 4px solid $color-primary;
+        }
+    }
+}
+.tab-container {
+    padding: 15px 25px;
+}
+.events-list {
+    .event {
+        padding: $gutter 0;
+        border-bottom: 1px solid $color-gray;
+        .title {
+            margin-top: 0;
+        }
+    }
+}
+ul.dropdown-menu {
+    background-color: $color-primary;
+    li a {
+        background-color: $color-primary;
+        color: $color-light;
+        border-bottom: $color-light;
+        &:hover, &.selected {
+            background-color: $color-primary-darker;
+            color: $color-light;
+        }
+    }
+}
