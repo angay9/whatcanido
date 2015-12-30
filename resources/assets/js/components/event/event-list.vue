@@ -1,9 +1,14 @@
 <template>
     <div>
-        <dropdown :options="{'starts_at.desc': 'Most recent', 'participants.desc': 'Most popular'}", :selected="1">  
+        <dropdown 
+            :when-changed="onDropdownChange" 
+            :options="{'starts_at.desc': 'Most recent', 'participants.desc': 'Most popular'}" 
+            :value.sync="value"
+        >  
         </dropdown>
+        <checkbox label="Old" :checked.sync="showOld" :when-changed="loadWithFilters"></checkbox>
     </div>
-    <ul class="events-list">
+    <ul class="events-list" v-if="paginator.data.length > 0">
         <li class="event" v-for="event in paginator.data">
             <div class="row">
                 <div class="col-xs-2">
@@ -34,8 +39,11 @@
             </div>
         </li>
     </ul>
-    <div class="text-center">
+    <div class="text-center" v-if="paginator.data.length > 0">
         <button class="btn btn-primary btn-block" @click="loadMore" v-if="paginator.total > paginator.data.length">MORE</button>
+    </div>
+    <div v-if="paginator.data.length == 0">
+        No events yet.
     </div>
 </template>
 <script>
@@ -48,31 +56,21 @@
             url: {
                 type: String,
                 required: true
+            },
+            showOld: {
+                type: Boolean,
+                default: false
             }
         },
         data: function () {
             return {
                 label: '',
-                value: '',
+                value: 'starts_at.desc',
             }
         },
-        computed: {
-
-        },
         ready: function () {
-            this.listenToEvents();
         },
         methods: {
-            listenToEvents: function () {
-                this.$on('dropdown:option-changed', function (data) {
-                    this.label = data.label;
-                    this.value = data.value;
-                    data = {
-                        'orderBy': this.value,
-                    };
-                    this.load(1, data);
-                }.bind(this));
-            },
             isParticipating: function (event) {
                 return event.participants.some(function (participant) {
                     return participant.id == App.config.user.id;
@@ -80,9 +78,20 @@
             },
             loadMore: function (e) {
                 e.preventDefault();
-                this.load();
+                var data = {
+                    'orderBy': this.value,
+                    'showOld': this.showOld ? 1 : 0
+                };
+                this.load(undefined, data);
             },
-            load: function (page, data) {
+            loadWithFilters: function () {
+                var data = {
+                    'orderBy': this.value,
+                    'showOld': this.showOld ? 1 : 0
+                };
+                this.load(1, data);
+            },
+            load: function (page, data, appendItems) {
                 var self = this;
                 var data = data !== undefined ? data : {};
                 var appendItems = page === undefined;
@@ -101,6 +110,11 @@
                     paginator.data = items;
                     self.$set('paginator', paginator);
                 });
+            },
+            onDropdownChange: function (data) {
+                this.value = data.value;
+                this.label = data.label;
+                this.loadWithFilters();
             }
         },
     }

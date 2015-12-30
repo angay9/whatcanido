@@ -44,6 +44,12 @@ textarea.form-control:focus {
     box-shadow: none;
 }
 
+.m-left-5 {
+    margin-left: 5px;
+}
+.m-right-5 {
+    margin-right: 5px;
+}
 .m-top-10 {
     margin-top: 10px;
 }
@@ -66,6 +72,9 @@ textarea.form-control:focus {
 }
 .text-gray {
     color: $color-gray;
+}
+.va-bottom {
+    vertical-align: bottom;
 }
 
 
@@ -198,7 +207,21 @@ body.app {
     background-color: $color-danger;
     border-color: $color-danger-darker;
 }
+.bg-default {
+    background-color: $color-light;
+}
 
+// checkbox
+i.checkbox.fa {
+    line-height: 16px;
+    width: 19px;
+    height: 15px;
+    font-size: 24px;
+    text-indent: -1px;
+    display: inline-block;
+    cursor: pointer;
+    margin: 0;
+}
 // tabs
 .tab-controls {
     border-bottom: 1px solid $color-gray;
@@ -229,15 +252,18 @@ body.app {
         }
     }
 }
-ul.dropdown-menu {
-    background-color: $color-primary;
-    li a {
+.dropdown {
+    display: inline-block;
+    ul.dropdown-menu {
         background-color: $color-primary;
-        color: $color-light;
-        border-bottom: $color-light;
-        &:hover, &.selected {
-            background-color: $color-primary-darker;
+        li a {
+            background-color: $color-primary;
             color: $color-light;
+            border-bottom: $color-light;
+            &:hover, &.selected {
+                background-color: $color-primary-darker;
+                color: $color-light;
+            }
         }
-    }
+    }    
 }

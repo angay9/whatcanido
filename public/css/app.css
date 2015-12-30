@@ -6366,6 +6366,12 @@ textarea.form-control:focus {
   outline: 0 none;
   box-shadow: none; }
 
+.m-left-5 {
+  margin-left: 5px; }
+
+.m-right-5 {
+  margin-right: 5px; }
+
 .m-top-10 {
   margin-top: 10px; }
 
@@ -6386,6 +6392,9 @@ textarea.form-control:focus {
 
 .text-gray {
   color: #7e7f9b; }
+
+.va-bottom {
+  vertical-align: bottom; }
 
 body.app {
   padding: 25px 0;
@@ -6494,6 +6503,19 @@ body.app {
   background-color: #c9302c;
   border-color: #ac2925; }
 
+.bg-default {
+  background-color: #f3f3f3; }
+
+i.checkbox.fa {
+  line-height: 16px;
+  width: 19px;
+  height: 15px;
+  font-size: 24px;
+  text-indent: -1px;
+  display: inline-block;
+  cursor: pointer;
+  margin: 0; }
+
 .tab-controls {
   border-bottom: 1px solid #7e7f9b; }
   .tab-controls > a {
@@ -6516,14 +6538,16 @@ body.app {
   .events-list .event .title {
     margin-top: 0; }
 
-ul.dropdown-menu {
-  background-color: #337ab7; }
-  ul.dropdown-menu li a {
-    background-color: #337ab7;
-    color: #f3f3f3;
-    border-bottom: #f3f3f3; }
-    ul.dropdown-menu li a:hover, ul.dropdown-menu li a.selected {
-      background-color: #2e6da4;
-      color: #f3f3f3; }
+.dropdown {
+  display: inline-block; }
+  .dropdown ul.dropdown-menu {
+    background-color: #337ab7; }
+    .dropdown ul.dropdown-menu li a {
+      background-color: #337ab7;
+      color: #f3f3f3;
+      border-bottom: #f3f3f3; }
+      .dropdown ul.dropdown-menu li a:hover, .dropdown ul.dropdown-menu li a.selected {
+        background-color: #2e6da4;
+        color: #f3f3f3; }
 
 /*# sourceMappingURL=app.css.map */

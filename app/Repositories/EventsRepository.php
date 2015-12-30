@@ -33,7 +33,7 @@ class EventsRepository {
         return $event->update($data);
     }
 
-    public function paginate($perPage = 20, $which = Event::ALL_EVENTS, array $with = [], array $orderBy = ['starts_at' => 'DESC'])
+    public function paginate($perPage = 20, $which = Event::ALL_EVENTS, array $with = [], array $orderBy = ['starts_at' => 'DESC'], $showOld = false)
     {
         $query = Event::with($with);
 
@@ -49,6 +49,9 @@ class EventsRepository {
             reset($orderBy);
             $field = key($orderBy);
             $query->orderBy($field, $orderBy[$field]);
+        }
+        if (! $showOld) {
+            $query->where('starts_at', '>=', date('Y-m-d H:i:s'));        
         }
 
         return $query->paginate($perPage);

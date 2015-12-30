@@ -1,4 +1,5 @@
 <template>
+
     <div class="dropdown">
         <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             {{ label }}
@@ -27,7 +28,13 @@
                 },
                 type: Boolean
             },
-            selected: {
+            whenChanged: {
+                type: Function,
+                default: function () {
+                    return new Function();
+                }
+            },
+            value: {
                 required: false,
                 default: function () {
                     return null;
@@ -36,7 +43,6 @@
         },
         data: function () {
             return {
-                value: '',
                 label: ''
             };
         },
@@ -45,14 +51,15 @@
             if (this.required && values.length > 0) {
                 var label = this.options[values[0]];
                 var value = values[0];
-                if (this.selected && this.selected in this.options) {
-                    label = this.options[this.selected];
-                    value = this.selected;
+
+                // Use default value if provided for value and label
+                if (this.value && this.value in this.options) {
+                    label = this.options[this.value];
+                    value = this.value;
                 }
 
-                this.label = this.options[values[0]];
-                this.value = values[0];
-
+                this.label = label;
+                this.value = value;
             }
         },
         methods: {
@@ -62,10 +69,15 @@
                 this.value = key; 
                 this.label = option;
                 if (optionChanged) {
-                    this.$dispatch('dropdown:option-changed', {
+                    this.whenChanged({
                         value: this.value,
                         label: this.label
-                    });   
+                    });
+                    
+                    // this.$dispatch('dropdown:option-changed', {
+                    //     value: this.value,
+                    //     label: this.label
+                    // });   
                 }
             }
         }

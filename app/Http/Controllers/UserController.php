@@ -7,9 +7,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Repositories\EventsRepository;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Behaviours\PaginatesEvents;
 
 class UserController extends Controller
 {
+    use PaginatesEvents;
+
     private $eventsRepo;
 
     public function __construct(EventsRepository $eventsRepo)
@@ -25,13 +28,7 @@ class UserController extends Controller
      */
     public function events(Request $request)
     {
-        $orderBy = explode('.', request()->input('orderBy', 'starts_at.desc'));
-
-        $paginator = $this
-            ->eventsRepo
-            ->paginate(20, Event::CREATED_BY_USER, ['participants', 'creator'], [$orderBy[0] => $orderBy[1]])
-            ->toArray()
-        ;
+        $paginator = $this->paginateEvents($this->eventsRepo, 20);
 
         if (request()->ajax()) {
             return $this->respondSuccess(['paginator' => $paginator]);

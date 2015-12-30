@@ -30,10 +30,10 @@ var alrt = require('./components/alert.vue');
 var sidebar = require('./components/sidebar.vue');
 var tabs = require('./components/tabs.vue');
 var dropdown = require('./components/dropdown.vue');
+var checkbox = require('./components/checkbox.vue');
 
 Vue.use(VueResource);
 Vue.http.headers.common['X-CSRF-TOKEN'] = App.config.csrfToken;
-
 
 Vue.component('avatar', avatar);
 Vue.component('alert', alrt);
@@ -43,6 +43,7 @@ Vue.component('event-list', evtList);
 Vue.component('sidebar', sidebar);
 Vue.component('tabs', tabs);
 Vue.component('dropdown', dropdown);
+Vue.component('checkbox', checkbox);
 
 new Vue({
     el: '#app'
