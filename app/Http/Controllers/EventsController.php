@@ -28,6 +28,7 @@ class EventsController extends Controller
 
     public function __construct(EventsRepository $repo)
     {
+        $this->middleware('auth');
         $this->repo = $repo;
     }
 
@@ -38,7 +39,7 @@ class EventsController extends Controller
      */
     public function index()
     {
-        $paginator = $this->paginateEvents($this->repo, 20);
+        $paginator = $this->paginateEvents($this->repo, Event::CREATED_BY_OTHERS, 20);
 
         if (request()->ajax()) {
             return $this->respondSuccess(['paginator' => $paginator]);
@@ -65,13 +66,14 @@ class EventsController extends Controller
      */
     public function store(StoreEventRequest $request)
     {
-        $requestData = request()->only(['title', 'description', 'latitude', 'longitude', 'starts_at']);
+        $requestData = request()->only(['title', 'description', 'latitude', 'longitude', 'starts_at', 'place']);
         $event = $this->repo->create([
             'title' =>  $requestData['title'],
             'desc'   =>  $requestData['description'],
             'lat'   =>  $requestData['latitude'],
             'lng'   =>  $requestData['longitude'],
             'starts_at'   =>  $requestData['starts_at'],
+            'place'   =>  $requestData['place'],
             'creator_id'    =>  auth()->user()->id
         ]);
 
@@ -121,13 +123,14 @@ class EventsController extends Controller
      */
     public function update(UpdateEventRequest $request, $id)
     {
-        $requestData = request()->only(['title', 'description', 'latitude', 'longitude', 'starts_at']);
+        $requestData = request()->only(['title', 'description', 'latitude', 'longitude', 'starts_at', 'place']);
         $event = $this->repo->update($id, [
             'title' =>  $requestData['title'],
             'desc'   =>  $requestData['description'],
             'lat'   =>  $requestData['latitude'],
             'lng'   =>  $requestData['longitude'],
             'starts_at' =>  $requestData['starts_at'],
+            'place' =>  $requestData['place'],
         ]);
 
         return $this->respondSuccess();

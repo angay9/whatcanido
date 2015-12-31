@@ -12,7 +12,7 @@ class Event extends Model
 
     protected $table = 'events';
     
-    protected $fillable = ['title', 'desc', 'lat', 'lng', 'creator_id', 'starts_at'];
+    protected $fillable = ['title', 'desc', 'lat', 'lng', 'creator_id', 'starts_at', 'place'];
 
     public function isCreator(User $user)
     {

@@ -17,6 +17,7 @@ class UserController extends Controller
 
     public function __construct(EventsRepository $eventsRepo)
     {
+        $this->middleware('auth');
         $this->eventsRepo = $eventsRepo;
     }
 
@@ -28,7 +29,7 @@ class UserController extends Controller
      */
     public function events(Request $request)
     {
-        $paginator = $this->paginateEvents($this->eventsRepo, 20);
+        $paginator = $this->paginateEvents($this->eventsRepo, Event::CREATED_BY_USER, 20);
 
         if (request()->ajax()) {
             return $this->respondSuccess(['paginator' => $paginator]);

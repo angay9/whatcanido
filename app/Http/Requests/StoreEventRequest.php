@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
+use Illuminate\Contracts\Validation\Validator;
 
 class StoreEventRequest extends Request
 {
@@ -28,7 +29,21 @@ class StoreEventRequest extends Request
             'description'   => 'required',
             'latitude'   =>  'required|numeric|min:0',
             'longitude'   =>  'required|numeric|min:0',
-            'starts_at' =>  'required|date|after:now' 
+            'starts_at' =>  'required|date|after:now',
+            'place' =>  'required'
         ];
+    }
+
+    /**
+     * Format the errors from the given Validator instance.
+     *
+     * @param  \Illuminate\Contracts\Validation\Validator  $validator
+     * @return array
+     */
+    protected function formatErrors(Validator $validator)
+    {
+        $errors = $validator->getMessageBag()->toArray();
+
+        return array_except($errors, ['latitude', 'longitude']);
     }
 }
