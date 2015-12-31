@@ -36,6 +36,9 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/home', 'HomeController@index');
 
+    /**
+     * Events
+     */
     Route::group(['prefix' => 'events'], function () {
         Route::post('/participate', 'EventsController@participate');
         Route::delete('/leave', 'EventsController@leave');
@@ -43,7 +46,16 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::resource('events', 'EventsController');
 
+    /**
+     * Users
+     */
     Route::group(['prefix' => 'user'], function () {
         Route::get('/events', 'UserController@events')->name('user.events');
     });
+
+
+    /**
+     * Comments
+     */
+    Route::resource('comments', 'CommentsController');
 });

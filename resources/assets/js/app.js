@@ -29,6 +29,7 @@ var evtList = require('./components/event/event-list.vue');
 var alrt = require('./components/alert.vue');
 var sidebar = require('./components/sidebar.vue');
 var tabs = require('./components/tabs.vue');
+var tab = require('./components/tab.vue');
 var dropdown = require('./components/dropdown.vue');
 var checkbox = require('./components/checkbox.vue');
 var Pikaday = require('pikaday');
@@ -38,7 +39,6 @@ $(document).ready(function () {
     dateInputs.forEach(function (input) {
         var pikaday = new Pikaday({field: input, format: 'YYYY-MM-DD HH:MM'});
     });
-
 });
 
 Vue.use(VueResource);
@@ -51,8 +51,10 @@ Vue.component('event-form', evtForm);
 Vue.component('event-list', evtList);
 Vue.component('sidebar', sidebar);
 Vue.component('tabs', tabs);
+Vue.component('tab', tab);
 Vue.component('dropdown', dropdown);
 Vue.component('checkbox', checkbox);
+
 
 new Vue({
     el: '#app'

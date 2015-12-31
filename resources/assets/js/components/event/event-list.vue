@@ -6,10 +6,14 @@
             :value.sync="value"
         >  
         </dropdown>
-        <checkbox label="Old" :checked.sync="showOld" :when-changed="loadWithFilters"></checkbox>
+        <checkbox 
+            label="Old" 
+            :checked.sync="showOld" 
+            :when-changed="loadWithFilters">
+        </checkbox>
     </div>
-    <ul class="events-list" v-if="paginator.data.length > 0">
-        <li class="event" v-for="event in paginator.data">
+    <ul class="list" v-if="paginator.data.length > 0">
+        <li class="list-item" v-for="event in paginator.data">
             <div class="row">
                 <div class="col-xs-2">
                     <img :src="event.img" class="img-responsive img-thumbnail">

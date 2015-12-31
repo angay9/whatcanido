@@ -24,7 +24,7 @@
             </div>
             <div class="col-md-6 text-center">
                 <h5 class="text-gray">COMMENTS</h5>
-                <span class="count">12 213</span>
+                <span class="count">{{ event.comments.length }}</span>
             </div>
         </div>
         <div class="row">
@@ -41,7 +41,44 @@
     <div class="container-fluid">
         <div class="row gray-bg">
             <div class="col-md-12">
-                <tabs></tabs>
+                <tabs>
+                    <tab label="Comments">
+                        <ul class="list" v-if="event.comments.length > 0">
+                            <li class="list-item" v-for="comment in event.comments">
+                                <div class="row">
+                                    <div class="col-xs-2">
+                                        <avatar :src="comment.user.img"></avatar>
+                                    </div>
+                                    <div class="col-xs-10">
+                                        <div class="row">
+                                            <div class="col-xs-12" v-if="isCommentOwner(comment)">
+                                                <a href="#" class="text-default m-right-10" @click="editComment(comment, $event)">
+                                                    <i class="fa fa-pencil"></i>
+                                                </a>
+                                                <a href="#" class="text-default m-right-10" @click="deleteComment(comment, $event)">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>
+                                                <span>{{ comment.created_at }}</span>
+                                            </div>
+                                        </div>
+                                        <p>{{ comment.comment }}</p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <div>
+                            <textarea placeholder="What do you think?" v-model="comment.comment" cols="10" rows="3" class="form-control">
+                            </textarea>
+                            <button class="btn btn-primary m-top-15" @click="saveComment">
+                                <i class="fa fa-plus fa-btn"></i>
+                                Send
+                            </button>
+                        </div>
+                    </tab>
+                    <tab label="Users">
+                        Users
+                    </tab>
+                </tabs>
             </div>
         </div>
     </div>
@@ -51,6 +88,14 @@
         props: {
             event: {
                 type: Object
+            }
+        },
+        data: function () {
+            return {
+                comment: {
+                    id: null,
+                    comment: '',
+                }
             }
         },
         computed: {
@@ -71,7 +116,6 @@
         ready: function () {
             App.socket.on('whatcanido-channel:App\\Events\\UserParticipatedInEvent', this.onUserParticipated);
             App.socket.on('whatcanido-channel:App\\Events\\UserLeftEvent', this.onUserLeft);
-
         },
         methods: {
             participate: function (e) {
@@ -93,6 +137,59 @@
                         App.alert('We will be missing you.');
                     })
                 ;
+            },
+            saveComment: function() {
+                var self = this;
+                var updateComment = this.comment.id != null;
+                var method = 'post';
+                var data = {comment: this.comment.comment, event_id: this.event.id};
+                var url = '/comments';
+                
+                if (updateComment) {
+                    method = 'patch';
+                    data['id'] = this.comment.id;
+                    url += ('/' + this.comment.id);
+                }
+
+                this.$http[method](url, data)
+                    .then(function(response) {
+                        if (!updateComment) {
+                            self.event.comments.push(response.data.comment);   
+                        } else {
+                            var comment = self.event.comments.filter(function (comment) {
+                                return comment.id == this.comment.id;
+                            }.bind(this))[0];
+                            comment.comment = response.data.comment.comment;
+                            comment.created_at = response.data.comment.created_at;
+                            comment.updated_at = response.data.comment.updated_at;
+                        }
+                        self.comment = {
+                            id: null,
+                            comment: '',
+                        };
+                    }, function (response) {
+                        App.alert(response.data, 'danger');
+                    });
+            },
+            deleteComment: function(comment, e) {
+                e.preventDefault();
+                if (confirm('Are you sure ?')) {
+                    this.$http.delete('/comments/' + comment.id)
+                        .then(function (resp) {
+                            this.event.comments.$remove(comment);
+                        });
+
+                }
+            },
+            editComment: function (comment, e) {
+                e.preventDefault();
+                this.$set('comment', {
+                    id: comment.id,
+                    comment: comment.comment,
+                });
+            },
+            isCommentOwner: function (comment) {
+                return App.config.user.id == comment.user.id;
             },
             onUserParticipated: function (data) {
                 this.$set('event.participants', data.event.participants);

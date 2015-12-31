@@ -90,10 +90,8 @@ class EventsController extends Controller
      */
     public function show($id)
     {
-        $event = Event::findOrFail($id);
-        $event->load('participants');
-        $event->load('creator');
-
+        $event = Event::with(['comments.user', 'participants', 'creator'])->findOrFail($id);
+        
         return view('events.show', ['event' => $event]);
     }
 
@@ -105,8 +103,7 @@ class EventsController extends Controller
      */
     public function edit($id)
     {
-        $event = Event::findOrFail($id);
-
+        $event = Event::with(['comments', 'participants', 'creator'])->findOrFail($id);
         if (!$event->isCreator(auth()->user())) {
             return $this->respondUnauthorized();
         }

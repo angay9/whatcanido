@@ -266,6 +266,16 @@ textarea.form-control:focus {
     outline: 0 none;
     box-shadow: none;
 }
+.text-default {
+    color: $color-light;
+    &:hover {
+        color: $color-light;        
+    }
+    &:focus {
+        color: $color-light;        
+    }
+}
+
 
 .m-left-5 {
     margin-left: 5px;
@@ -273,12 +283,26 @@ textarea.form-control:focus {
 .m-right-5 {
     margin-right: 5px;
 }
+.m-left-10 {
+    margin-left: 10px;
+}
+.m-right-10 {
+    margin-right: 10px;
+}
+
 .m-top-10 {
     margin-top: 10px;
 }
 .m-bot-10 {
     margin-bottom: 10px;
 }
+.m-top-15 {
+    margin-top: 15px;
+}
+.m-bot-15 {
+    margin-bottom: 15px;
+}
+
 
 .m-top-20 {
     margin-top: 20px;
@@ -464,10 +488,10 @@ i.checkbox.fa {
     }
 }
 .tab-container {
-    padding: 15px 25px;
+    padding: 15px 0;
 }
-.events-list {
-    .event {
+.list {
+    .list-item {
         padding: $gutter 0;
         border-bottom: 1px solid $color-gray;
         .title {

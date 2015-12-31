@@ -1,29 +1,34 @@
 <template>
+    <div class="tab-controls clearfix">
+        <a href="#" 
+            class="tab-control" 
+            @click="whenTabCliecked($index, $event)"
+            :class="{'active': activeIndex == $index}"
+            v-for="label in labels"
+        >
+            {{ label }}
+        </a>
+    </div>
     <div class="tab-container">
         <slot></slot>
-        <div class="tab-controls clearfix">
-            <a href="#one" class="tab-control"  @click="active = $index" :class="{'active': $index == active}" v-for="n in 4">Text {{ $index }}</a>
-        </div>
-        <div class="tab-container">
-            <div id="one" v-for="n in 4" :class="{'hide': $index != active}">
-                <p>Text {{ $index }}</p>
-            </div>
-        </div>
     </div>
 </template>
 <script>
     module.exports = {
         data: function () {
             return {
-
+                activeIndex: 0,
+                labels: []
             };
         },
         props: {
-            active: {
-                type: Number,
-                default: function () {
-                    return 0;
-                }
+        },
+        ready: function () {
+        },
+        methods: {
+            whenTabCliecked: function (index, e) {
+                e.preventDefault();
+                this.$set('activeIndex', index);
             }
         }
     }

@@ -28,4 +28,9 @@ class Event extends Model
     {
         return $this->belongsToMany('App\User', 'events_users');
     }
+
+    public function comments()
+    {
+        return $this->hasMany('App\Comment', 'event_id', 'id');
+    }
 }
