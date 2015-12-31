@@ -16,13 +16,13 @@
                 <li>
                     <a href="/user/events">Organized by me</a>
                 </li>
-                <li class="clearfix">
+                <!-- <li class="clearfix">
                     <a href="#">Notifications <span class="label label-primary pull-right">12</span></a>
-                </li>
+                </li> -->
             </ul>
             <ul class="m-top-40">
                 <li class="menu-title">Application</li>
-                <li><a href="#">Settings</a></li>
+                <li><a href="/settings">Settings</a></li>
 <!--                 <li><a href="/password/reset">Account</a></li> -->
             </ul>
         </div>

@@ -58,4 +58,9 @@ Route::group(['middleware' => 'web'], function () {
      * Comments
      */
     Route::resource('comments', 'CommentsController');
+
+    /**
+     * Settings
+     */
+    Route::get('settings', 'SettingsController@index');
 });
