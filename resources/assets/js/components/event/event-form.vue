@@ -20,7 +20,7 @@
         </div>
  -->        <div class="form-group">
             <label for="" class="control-label">Starts at (yyyy-mm-dd hh:mm)</label>
-            <input type="text" class="form-control" v-model="model.starts_at">
+            <input type="text" class="form-control date" v-model="model.starts_at">
         </div>
         <div class="form-group">
             <label for="" class="control-label">Place</label>

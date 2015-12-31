@@ -16,18 +16,21 @@
                 </div>
                 <div class="col-xs-10">
                     <div class="row">
-                        <div class="col-xs-7">
+                        <div class="col-xs-12">
                             <h4 class="title">
                                 {{ event.title }} <i data-toggle="tooltip" data-placement="top" title="Participating already." v-if="isParticipating(event)" class="text-primary fa fa-check-circle"></i>
                             </h4>
                         </div>
-                        <div class="col-xs-5">
-                            <div>
-                                Starts at: {{ event.starts_at }}
-                            </div>
-                            <div>
-                                Participants: {{ event.participants.length }}
-                            </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            Starts at: {{ event.starts_at }}
+                        </div>
+                        <div class="col-xs-4">
+                            Participants: {{ event.participants.length }}
+                        </div>
+                        <div class="col-xs-4">
+                            Place: {{ event.place }}
                         </div>
                     </div>
                     

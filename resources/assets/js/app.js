@@ -3,6 +3,7 @@ var App = require('./core/Application.js');
 App.init(config);
 window.App = App;
 
+
 // Socket.io
 var io = require('socket.io-client');
 var socket = io(App.config.url + ':3000');
@@ -20,7 +21,6 @@ Events.observe();
 var Vue = require('vue');
 var VueResource = require('vue-resource');
 
-
 // Components
 var avatar = require('./components/avatar.vue');
 var evtView = require('./components/event/event-view.vue');
@@ -31,6 +31,15 @@ var sidebar = require('./components/sidebar.vue');
 var tabs = require('./components/tabs.vue');
 var dropdown = require('./components/dropdown.vue');
 var checkbox = require('./components/checkbox.vue');
+var Pikaday = require('pikaday');
+
+$(document).ready(function () {
+    var dateInputs = Array.prototype.slice.call(document.querySelectorAll('.date'));
+    dateInputs.forEach(function (input) {
+        var pikaday = new Pikaday({field: input, format: 'YYYY-MM-DD HH:MM'});
+    });
+
+});
 
 Vue.use(VueResource);
 Vue.http.headers.common['X-CSRF-TOKEN'] = App.config.csrfToken;
