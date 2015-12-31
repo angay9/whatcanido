@@ -59,3 +59,4 @@ Vue.component('checkbox', checkbox);
 new Vue({
     el: '#app'
 });
+

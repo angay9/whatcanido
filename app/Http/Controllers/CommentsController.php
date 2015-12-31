@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Comment;
 use App\Events\CommentWasCreated;
+use App\Events\CommentWasDeleted;
 use App\Events\CommentWasUpdated;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
@@ -96,6 +97,8 @@ class CommentsController extends Controller
         }
 
         $comment->delete($id);
+        
+        event(new CommentWasDeleted($id));
 
         return $this->respondSuccess();
     }

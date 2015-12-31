@@ -32,4 +32,16 @@ class CommentWasCreated extends Event implements ShouldBroadcast
     {
         return ['whatcanido-channel'];
     }
+
+    /**
+     * Get the data to broadcast.
+     *
+     * @return array
+     */
+    public function broadcastWith()
+    {
+        $this->comment->user; // This patch allowes to send participants along with the event object 
+
+        return ['comment' => $this->comment];
+    }
 }

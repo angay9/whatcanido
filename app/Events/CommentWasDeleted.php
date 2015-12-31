@@ -7,20 +7,20 @@ use App\Events\Event;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class CommentWasUpdated extends Event implements ShouldBroadcast
+class CommentWasDeleted extends Event implements ShouldBroadcast
 {
     use SerializesModels;
 
-    public $comment;
+    public $id;
 
     /**
      * Create a new comment instance.
      *
      * @return void
      */
-    public function __construct(Comment $comment)
+    public function __construct($id)
     {
-        $this->comment = $comment;
+        $this->id = $id;
     }
 
     /**
@@ -33,15 +33,4 @@ class CommentWasUpdated extends Event implements ShouldBroadcast
         return ['whatcanido-channel'];
     }
 
-    /**
-     * Get the data to broadcast.
-     *
-     * @return array
-     */
-    public function broadcastWith()
-    {
-        $this->comment->user; // This patch allowes to send participants along with the event object 
-
-        return ['comment' => $this->comment];
-    }
 }

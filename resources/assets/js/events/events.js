@@ -7,6 +7,7 @@ module.exports = {
         App.socket.on('whatcanido-channel:App\\Events\\EventWasCreated', this.onEventWasCreated);
         App.socket.on('whatcanido-channel:App\\Events\\UserParticipatedInEvent', this.onUserParticipated);
         App.socket.on('whatcanido-channel:App\\Events\\UserLeftEvent', this.onUserLeft);
+        App.socket.on('whatcanido-channel:App\\Events\\CommentWasCreated', this.onCommentCreated);
     },
     onEventWasCreated: function (data) {
         if (App.config.user.id != data.event.creator_id) {
@@ -21,6 +22,11 @@ module.exports = {
     onUserLeft: function (data) {
         if (App.config.user.id == data.event.creator.id) {
             App.alert('A user has left your <a href="/events/' + data.event.id + '">event</a>');                
+        }
+    },
+    onCommentCreated: function (data) {
+        if (App.config.user.id != data.comment.user.id) {
+            App.alert('A user has comment on one <a href="/events/' + data.comment.event_id + '">one</a> of your events.');
         }
     }
 }

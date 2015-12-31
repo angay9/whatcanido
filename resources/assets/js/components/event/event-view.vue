@@ -51,13 +51,15 @@
                                     </div>
                                     <div class="col-xs-10">
                                         <div class="row">
-                                            <div class="col-xs-12" v-if="isCommentOwner(comment)">
-                                                <a href="#" class="text-default m-right-10" @click="editComment(comment, $event)">
+                                            <div class="col-xs-4">
+                                                <a href="#" v-if="isCommentOwner(comment)" class="text-default m-right-10" @click="editComment(comment, $event)">
                                                     <i class="fa fa-pencil"></i>
                                                 </a>
-                                                <a href="#" class="text-default m-right-10" @click="deleteComment(comment, $event)">
+                                                <a href="#" v-if="isCommentOwner(comment)" class="text-default m-right-10" @click="deleteComment(comment, $event)">
                                                     <i class="fa fa-trash"></i>
                                                 </a>
+                                            </div>
+                                            <div class="col-xs-8 text-right">
                                                 <span>{{ comment.created_at }}</span>
                                             </div>
                                         </div>
@@ -101,8 +103,6 @@
         computed: {
             canParticipate: function () {
                 return (App.config.user.id != this.event.creator.id)
-                // &&
-                // !this.isParticipating
             },
             isParticipating: function () {
                 return this.event.participants.some(function (participant) {
@@ -116,6 +116,10 @@
         ready: function () {
             App.socket.on('whatcanido-channel:App\\Events\\UserParticipatedInEvent', this.onUserParticipated);
             App.socket.on('whatcanido-channel:App\\Events\\UserLeftEvent', this.onUserLeft);
+
+            App.socket.on('whatcanido-channel:App\\Events\\CommentWasCreated', this.onCommentCreated);
+            App.socket.on('whatcanido-channel:App\\Events\\CommentWasUpdated', this.onCommentUpdated);
+            App.socket.on('whatcanido-channel:App\\Events\\CommentWasDeleted', this.onCommentDeleted);
         },
         methods: {
             participate: function (e) {
@@ -154,11 +158,9 @@
                 this.$http[method](url, data)
                     .then(function(response) {
                         if (!updateComment) {
-                            self.event.comments.push(response.data.comment);   
+                            self.event.comments.push(response.data.comment);
                         } else {
-                            var comment = self.event.comments.filter(function (comment) {
-                                return comment.id == this.comment.id;
-                            }.bind(this))[0];
+                            var comment = self.findComment(this.comment.id);
                             comment.comment = response.data.comment.comment;
                             comment.created_at = response.data.comment.created_at;
                             comment.updated_at = response.data.comment.updated_at;
@@ -181,6 +183,13 @@
 
                 }
             },
+            findComment: function (id) {
+                var comments = this.event.comments.filter(function (comment) {
+                    return comment.id == id;
+                }.bind(this));
+
+                return comments.length > 0 ? comments[0] : null;
+            },
             editComment: function (comment, e) {
                 e.preventDefault();
                 this.$set('comment', {
@@ -192,10 +201,35 @@
                 return App.config.user.id == comment.user.id;
             },
             onUserParticipated: function (data) {
-                this.$set('event.participants', data.event.participants);
+                if (this.event.id == data.event.id) {
+                    this.$set('event.participants', data.event.participants);   
+                }
             },
             onUserLeft: function (data) {
-                this.$set('event.participants', data.event.participants);
+                if (this.event.id == data.event.id) {
+                    this.$set('event.participants', data.event.participants);
+                }
+            },
+            onCommentCreated: function (data) {
+                if (App.config.user.id != data.comment.user.id) {
+                    this.event.comments.push(data.comment);
+                }
+            },
+            onCommentUpdated: function (data) {
+                if (App.config.user.id != data.comment.user.id) {
+                    var comment = this.findComment(data.comment.id);
+                    comment.comment = data.comment.comment;
+                    comment.created_at = data.comment.created_at;
+                    comment.updated_at = data.comment.updated_at;
+                    comment.user = data.comment.user;
+                }
+                
+            },
+            onCommentDeleted: function (data) {
+                if (App.config.user.id != data.comment.user.id) {
+                    var comment = this.findComment(data.id);
+                    this.event.comments.$remove(comment);   
+                }
             }
         }
     };
