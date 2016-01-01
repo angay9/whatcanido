@@ -4,14 +4,9 @@
     <div class="container-fluid container-pad">
         <div class="row">
             <div class="col-md-12">
-                <tabs>
-                    <tab label="General">
-                        
-                    </tab>
-                    <tab label="Email">
-                        
-                    </tab>
-                </tabs>
+                <settings>
+                    
+                </settings>
             </div>
         </div>
 

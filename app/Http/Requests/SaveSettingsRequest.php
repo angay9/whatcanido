@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Comment;
 use App\Http\Requests\Request;
 
-class UpdateCommentRequest extends Request
+class SaveSettingsRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,10 +13,7 @@ class UpdateCommentRequest extends Request
      */
     public function authorize()
     {
-        $commentId = request()->input('id');
-        $comment = Comment::findOrFail($commentId);
-
-        return auth()->check() && $comment->isOwner(auth()->user());
+        return auth()->check();
     }
 
     /**
@@ -28,9 +24,9 @@ class UpdateCommentRequest extends Request
     public function rules()
     {
         return [
-            'id'    =>  'required|exists:comments,id',
-            'comment'   =>  'required',
-            'event_id'  =>  'required|exists:events,id'
+            'address'   =>  'max:255',
+            'email_notifications'   =>  'boolean',
+            'email' =>  'required|email|max:255',
         ];
     }
 }

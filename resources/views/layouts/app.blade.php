@@ -32,7 +32,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script>
         var config = {
-            user: {!! auth()->user() !!},
+            user: {!! auth()->user()->load('settings') !!},
             csrfToken: "{{ csrf_token() }}",
             url: "{{ url('/') }}",
         };

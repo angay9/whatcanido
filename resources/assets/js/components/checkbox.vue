@@ -1,5 +1,5 @@
 <template>
-    <label for="" class="m-left-5 va-bottom">
+    <label for="" v-if="label != ''" class="m-left-5 va-bottom">
         <i 
             class="checkbox bg-default fa" 
             @click="onChange" 
@@ -13,6 +13,18 @@
         </i>
         <span class="m-left-5">{{ label }}</span>        
     </label>
+
+    <i 
+        v-else
+        class="checkbox bg-default fa" 
+        @click="onChange" 
+        :class="{
+            'fa-check-square': checked, 
+            'fa-square': !checked,
+            'text-primary': checked,
+            'text-default': !checked
+        }"
+    >
 
 </template>
 <script>

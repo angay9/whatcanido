@@ -80,7 +80,7 @@
         methods: {
             isParticipating: function (event) {
                 return event.participants.some(function (participant) {
-                    return participant.id == App.config.user.id;
+                    return participant.id == App.user().id;
                 }, this);
             },
             loadMore: function (e) {

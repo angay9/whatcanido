@@ -9,6 +9,8 @@ var io = require('socket.io-client');
 var socket = io(App.config.url + ':3000');
 socket.on('connect', function() {
 });
+
+
 socket.on('disconnect', function() {
 });
 
@@ -21,6 +23,7 @@ Events.observe();
 var Vue = require('vue');
 var VueResource = require('vue-resource');
 
+
 // Components
 var avatar = require('./components/avatar.vue');
 var evtView = require('./components/event/event-view.vue');
@@ -32,6 +35,7 @@ var tabs = require('./components/tabs.vue');
 var tab = require('./components/tab.vue');
 var dropdown = require('./components/dropdown.vue');
 var checkbox = require('./components/checkbox.vue');
+var settings = require('./components/settings.vue');
 var Pikaday = require('pikaday');
 
 $(document).ready(function () {
@@ -54,8 +58,9 @@ Vue.component('tabs', tabs);
 Vue.component('tab', tab);
 Vue.component('dropdown', dropdown);
 Vue.component('checkbox', checkbox);
-
+Vue.component('settings', settings);
 
 new Vue({
     el: '#app'
 });
+

@@ -6,6 +6,9 @@ var App = {
     },
     store: {
         messagesStore: require('../stores/messagesStore.js')
+    },
+    user: function () {
+        return this.config.user;
     }
 };
 
@@ -48,9 +51,19 @@ App.alert = function (msg, type, normalizeStrings) {
 
     App.store.messagesStore.messages[type] = messages;
     App.store.messagesStore['type'] = type;
+
+    setTimeout(function () {
+        App.clearAlert();
+    }, 3000);
 };
 
 App.clearAlert = function (type) {
+    App.store.messagesStore.messages[type] = null;
+    App.store.messagesStore['type'] = null;
+};
+
+
+App.clearConfirm = function (type) {
     App.store.messagesStore.messages[type] = null;
     App.store.messagesStore['type'] = null;
 };

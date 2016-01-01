@@ -5,7 +5,7 @@
     <div class="container-fluid gray-lighter-bg event-desc">
         <div class="row">
             <div class="col-md-12">
-                <avatar :src="event.creator.img"></avatar>
+                <avatar :src="event.creator.img" class="bordered img-responsive"></avatar>
                 <span class="name text-center">{{ event.creator.name }}</span>
             </div>
         </div>
@@ -44,26 +44,30 @@
                 <tabs>
                     <tab label="Comments">
                         <ul class="list" v-if="event.comments.length > 0">
-                            <li class="list-item" v-for="comment in event.comments">
+                            <li 
+                                class="list-item" 
+                                v-for="comment in event.comments" 
+                            >
                                 <div class="row">
                                     <div class="col-xs-2">
-                                        <avatar :src="comment.user.img"></avatar>
+                                        <avatar :src="comment.user.img" class="avatar-sm"></avatar>
                                     </div>
                                     <div class="col-xs-10">
                                         <div class="row">
-                                            <div class="col-xs-4">
-                                                <a href="#" v-if="isCommentOwner(comment)" class="text-default m-right-10" @click="editComment(comment, $event)">
-                                                    <i class="fa fa-pencil"></i>
-                                                </a>
-                                                <a href="#" v-if="isCommentOwner(comment)" class="text-default m-right-10" @click="deleteComment(comment, $event)">
-                                                    <i class="fa fa-trash"></i>
-                                                </a>
+                                            <div class="col-xs-11" :class="{'cursor-pointer': isCommentOwner(comment)}" @click="editComment(comment, $event)">
+                                                <span class="m-right-10 font-bold">{{ comment.user.name }}</span>
+                                                <div>
+                                                    <em>{{ comment.created_at }}</em>
+                                                </div>
+                                                <p>{{ comment.comment }}</p>
                                             </div>
-                                            <div class="col-xs-8 text-right">
-                                                <span>{{ comment.created_at }}</span>
+
+                                            <div class="col-xs-1">
+                                                <a href="#" v-if="isCommentOwner(comment)" class="close text-default m-right-10" @click="deleteComment(comment, $event)">
+                                                    <i class="fa fa-close"></i>
+                                                </a>
                                             </div>
                                         </div>
-                                        <p>{{ comment.comment }}</p>
                                     </div>
                                 </div>
                             </li>
@@ -102,15 +106,15 @@
         },
         computed: {
             canParticipate: function () {
-                return (App.config.user.id != this.event.creator.id)
+                return (App.user().id != this.event.creator.id)
             },
             isParticipating: function () {
                 return this.event.participants.some(function (participant) {
-                    return participant.id == App.config.user.id;
+                    return participant.id == App.user().id;
                 }, this);
             },
             canEdit: function () {
-                return this.event && App.config.user.id == this.event.creator.id;
+                return this.event && App.user().id == this.event.creator.id;
             }
         },
         ready: function () {
@@ -178,6 +182,10 @@
                 if (confirm('Are you sure ?')) {
                     this.$http.delete('/comments/' + comment.id)
                         .then(function (resp) {
+                            this.comment = {
+                                id: null,
+                                comment: '',
+                            };
                             this.event.comments.$remove(comment);
                         });
 
@@ -198,7 +206,7 @@
                 });
             },
             isCommentOwner: function (comment) {
-                return App.config.user.id == comment.user.id;
+                return App.user().id == comment.user.id;
             },
             onUserParticipated: function (data) {
                 if (this.event.id == data.event.id) {
@@ -211,12 +219,12 @@
                 }
             },
             onCommentCreated: function (data) {
-                if (App.config.user.id != data.comment.user.id) {
+                if (App.user().id != data.comment.user.id) {
                     this.event.comments.push(data.comment);
                 }
             },
             onCommentUpdated: function (data) {
-                if (App.config.user.id != data.comment.user.id) {
+                if (App.user().id != data.comment.user.id) {
                     var comment = this.findComment(data.comment.id);
                     comment.comment = data.comment.comment;
                     comment.created_at = data.comment.created_at;
@@ -226,8 +234,8 @@
                 
             },
             onCommentDeleted: function (data) {
-                if (App.config.user.id != data.comment.user.id) {
-                    var comment = this.findComment(data.id);
+                var comment = this.findComment(data.id);
+                if (App.user().id != comment.user.id) {
                     this.event.comments.$remove(comment);   
                 }
             }

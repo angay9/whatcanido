@@ -228,7 +228,8 @@ http://nicolasgallagher.com/micro-clearfix-hack/
 $gray: #393a4c;
 $gray-lighter: #424558;
 $gray-border: #515467;
-$color-light: #f3f3f3;
+$color-light: #d3d3d3;
+$color-lighter: #f3f3f3;
 $color-gray: #7e7f9b;
 $color-primary: #337ab7;
 $color-primary-darker: #2e6da4;
@@ -253,6 +254,29 @@ ul {
     }
 }
 
+.pac-container, .pac-container:hover {
+    background-color: $gray !important;
+    border-color: $color-lighter;
+    border-top: none;
+
+    .pac-item-selected {
+        background-color: $gray !important;
+    }
+    .pac-item {
+        border-top: none;
+        color: $color-lighter !important;        
+        .pac-matched {
+            color: $color-lighter !important;
+        }
+        .pac-item-query {
+            color: $color-light;
+        } 
+    }
+    .pac-item:hover {
+        background-color: $gray-lighter !important;
+    } 
+}
+
 input[type="text"].form-control,
 input[type="number"].form-control,
 textarea.form-control,
@@ -267,12 +291,12 @@ textarea.form-control:focus {
     box-shadow: none;
 }
 .text-default {
-    color: $color-light;
+    color: $color-lighter;
     &:hover {
-        color: $color-light;        
+        color: $color-lighter;        
     }
     &:focus {
-        color: $color-light;        
+        color: $color-lighter;        
     }
 }
 
@@ -351,9 +375,9 @@ body.app {
     margin-right: $gutter;
     margin: $gutter 0;
     text-transform: uppercase;
-    color: $color-light;
+    color: $color-lighter;
     a {
-        color: $color-light;
+        color: $color-lighter;
         display: block;
         padding: 10px 0;
         -webkit-transition: padding .2s;
@@ -361,7 +385,7 @@ body.app {
         -o-transition: padding .2s;
         transition: padding .2s;
         &:hover, &:focus {
-            color: $color-light;
+            color: $color-lighter;
             text-decoration: none;
             padding-left: 10px;
         }
@@ -412,7 +436,7 @@ body.app {
 }
 .gray-bg {
     background: $gray;
-    color: $color-light;
+    color: $color-lighter;
 }
 .gray-lighter-bg {
     background: $gray-lighter;
@@ -423,6 +447,9 @@ body.app {
         margin-top: -64px - $gutter;
     }
 }
+.avatar-sm {
+    max-width: 80px !important;
+}
 
 .alert {
     position: fixed;
@@ -432,14 +459,21 @@ body.app {
     width: 400px;
     color: #fff !important;
     a {
-        color: $color-light;
+        color: $color-lighter;
     }
 }
 
 // Helpers
+.cursor-pointer {
+    cursor: pointer;
+}
 .bordered {
     border: 5px solid rgba(255, 255, 255, .15);
 }
+.font-bold {
+    font-weight: 600;
+}
+
 .count {
     font-size: 20px;
 }
@@ -455,7 +489,7 @@ body.app {
     border-color: $color-danger-darker;
 }
 .bg-default {
-    background-color: $color-light;
+    background-color: $color-lighter;
 }
 
 // checkbox
@@ -468,17 +502,19 @@ i.checkbox.fa {
     display: inline-block;
     cursor: pointer;
     margin: 0;
+    min-height: initial !important;
+    padding-top: 0 !important;
 }
 // tabs
 .tab-controls {
     border-bottom: 1px solid $color-gray;
     & > a {
-        color: $color-light;
+        color: $color-lighter;
         display: inline-block;
         padding: 15px 25px;
         // float: left;
         &:focus, &:hover {
-            color: $color-light;
+            color: $color-lighter;
             text-decoration: none;
         }
         &.active {
@@ -505,7 +541,7 @@ i.checkbox.fa {
         background-color: $color-primary;
         li a {
             background-color: $color-primary;
-            color: $color-light;
+            color: $color-lighter;
             border-bottom: $color-light;
             &:hover, &.selected {
                 background-color: $color-primary-darker;

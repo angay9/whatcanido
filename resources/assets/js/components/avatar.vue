@@ -1,8 +1,8 @@
 <template>
-    <img :src="src" alt="Avatar" class="avatar img-responsive img-circle bordered center-block">
+    <img :src="src" alt="Avatar" class="avatar img-circle center-block" :class="class">
 </template>
 <script>
     module.exports = {
-        props: ['src']
+        props: ['src', 'class']
     };
 </script>

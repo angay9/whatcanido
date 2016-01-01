@@ -11,7 +11,6 @@
 |
 */
 
-
 Route::get('/', function () {
     return redirect()->to('/home');
 });
@@ -63,4 +62,5 @@ Route::group(['middleware' => 'web'], function () {
      * Settings
      */
     Route::get('settings', 'SettingsController@index');
+    Route::post('settings', 'SettingsController@save');
 });

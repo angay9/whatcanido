@@ -40,7 +40,8 @@ class CommentWasCreated extends Event implements ShouldBroadcast
      */
     public function broadcastWith()
     {
-        $this->comment->user; // This patch allowes to send participants along with the event object 
+        $this->comment->user; // This patch allowes to send user along with the event object 
+        $this->comment->event; // This patch allowes to send event along with the event object 
 
         return ['comment' => $this->comment];
     }

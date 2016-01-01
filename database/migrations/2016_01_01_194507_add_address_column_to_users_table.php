@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddPlaceColumnToEventsTable extends Migration
+class AddAddressColumnToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,8 @@ class AddPlaceColumnToEventsTable extends Migration
      */
     public function up()
     {
-        Schema::table('events', function (Blueprint $table) {
-            $table->string('place');
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('address');
         });
     }
 
@@ -24,8 +24,8 @@ class AddPlaceColumnToEventsTable extends Migration
      */
     public function down()
     {
-        Schema::table('events', function (Blueprint $table) {
-            $table->dropColumn('place');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('address');
         });
     }
 }
