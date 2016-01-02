@@ -36,6 +36,7 @@ var tab = require('./components/tab.vue');
 var dropdown = require('./components/dropdown.vue');
 var checkbox = require('./components/checkbox.vue');
 var settings = require('./components/settings.vue');
+var fileUploader = require('./components/file-uploader.vue');
 var Pikaday = require('pikaday');
 
 $(document).ready(function () {
@@ -59,6 +60,7 @@ Vue.component('tab', tab);
 Vue.component('dropdown', dropdown);
 Vue.component('checkbox', checkbox);
 Vue.component('settings', settings);
+Vue.component('file-uploader', fileUploader);
 
 new Vue({
     el: '#app'

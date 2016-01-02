@@ -3,6 +3,25 @@
 
 @charset "UTF-8";
 
+.dropzone {
+    border: 2px dashed #d3d3d3;
+    line-height: 300px;
+    overflow-y: auto;
+}
+.dropzone.active {
+    border-color: #737373;
+}
+.dropzone.active .placeholder {
+    color: #737373;
+}
+.dropzone .placeholder {
+    color: #d3d3d3;
+}
+.dropzone.has-files {
+    height: 300px;
+    line-height: 16px;
+}
+
 /*!
  * Pikaday
  * Copyright © 2014 David Bushell | BSD & MIT license | http://dbushell.com/

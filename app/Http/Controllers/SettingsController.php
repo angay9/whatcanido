@@ -40,4 +40,9 @@ class SettingsController extends Controller
 
         return $this->respondSuccess();
     }
+
+    public function saveAvatar(SaveAvatarRequest $request)
+    {
+        
+    }
 }

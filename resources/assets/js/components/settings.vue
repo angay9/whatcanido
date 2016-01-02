@@ -30,8 +30,9 @@
                 </div>
             </form>
         </tab>
-        <tab label="Email">
-            
+        <tab label="Avatar">
+            <file-uploader url="/settings/avatar">
+            </file-uploader>
         </tab>
     </tabs>
 

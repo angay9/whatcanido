@@ -82,7 +82,21 @@
                         </div>
                     </tab>
                     <tab label="Users">
-                        Users
+                        <ul class="list" v-if="event.participants.length">
+                            <li class="list-item" v-for="participant in event.participants">
+                                <div class="row">
+                                    <div class="col-xs-2">
+                                        <avatar :src="participant.img" class="avatar-sm"></avatar>
+                                    </div>
+                                    <div class="col-xs-10">
+                                        <h4>{{ participant.name }}</h4>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <p v-else>
+                            No participants yet.
+                        </p>
                     </tab>
                 </tabs>
             </div>

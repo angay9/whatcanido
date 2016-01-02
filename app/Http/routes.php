@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return redirect()->to('/home');
+    return redirect()->to('/events');
 });
 
 /*
@@ -33,7 +33,7 @@ Route::group(['middleware' => ['web']], function () {
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
-    Route::get('/home', 'HomeController@index');
+    // Route::get('/home', 'HomeController@index');
 
     /**
      * Events
@@ -63,4 +63,5 @@ Route::group(['middleware' => 'web'], function () {
      */
     Route::get('settings', 'SettingsController@index');
     Route::post('settings', 'SettingsController@save');
+    Route::post('settings/avatar', 'SettingsController@saveAvatar');
 });
