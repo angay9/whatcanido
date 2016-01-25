@@ -31,7 +31,10 @@
             </form>
         </tab>
         <tab label="Avatar">
-            <file-uploader url="/settings/avatar">
+            <file-uploader 
+                url="/settings/avatar"
+                :file="avatar"
+            >
             </file-uploader>
         </tab>
     </tabs>
@@ -49,6 +52,11 @@
             return {
                 user: App.user(),
             };
+        },
+        computed: {
+            avatar: function () {
+                return App.user().avatar() ? { 'src' : App.user().avatar() } : null;
+            }
         },
         created: function () {
             if (!this.user.settings) {

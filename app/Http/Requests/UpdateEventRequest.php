@@ -39,7 +39,8 @@ class UpdateEventRequest extends Request
             'latitude'   =>  'required|numeric|min:0',
             'longitude'   =>  'required|numeric|min:0',
             'starts_at' =>  'required|date',
-            'place' =>  'required'
+            'place' =>  'required',
+            // 'file'  =>  'required|mimes:jpeg,png|size:4096'
         ];
     }
 

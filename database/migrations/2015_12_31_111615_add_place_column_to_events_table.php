@@ -13,7 +13,7 @@ class AddPlaceColumnToEventsTable extends Migration
     public function up()
     {
         Schema::table('events', function (Blueprint $table) {
-            $table->string('place');
+            $table->string('place')->default('');
         });
     }
 

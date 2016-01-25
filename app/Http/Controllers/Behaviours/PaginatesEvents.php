@@ -7,6 +7,14 @@ use App\Repositories\EventsRepository;
 
 trait PaginatesEvents {
     
+    /**
+     * Paginate events
+     * 
+     * @param  EventsRepository $eventsRepo
+     * @param  integer          $whichOnes 
+     * @param  integer          $perPage   
+     * @return Paginator                     
+     */
     protected function paginateEvents(EventsRepository $eventsRepo, $whichOnes, $perPage = 20) 
     {
         $orderBy = explode('.', request()->input('orderBy', 'starts_at.desc'));

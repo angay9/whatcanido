@@ -6348,7 +6348,7 @@ button.close {
 
 .dropzone {
   border: 2px dashed #d3d3d3;
-  line-height: 300px;
+  line-height: 150px;
   overflow-y: auto; }
 
 .dropzone.active {
@@ -6361,7 +6361,7 @@ button.close {
   color: #d3d3d3; }
 
 .dropzone.has-files {
-  height: 300px;
+  height: 200px;
   line-height: 16px; }
 
 /*!
@@ -6587,6 +6587,7 @@ ul {
 input[type="text"].form-control,
 input[type="number"].form-control,
 textarea.form-control,
+input[type="file"].form-control,
 input[type="text"].form-control:focus,
 input[type="number"].form-control:focus,
 textarea.form-control:focus {
@@ -6727,7 +6728,12 @@ body.app {
     margin-top: -89px; }
 
 .avatar-sm {
-  max-width: 80px !important; }
+  max-width: 80px !important;
+  max-height: 80px !important; }
+
+.avatar {
+  width: 150px !important;
+  height: 150px !important; }
 
 .alert {
   position: fixed;
@@ -6810,5 +6816,23 @@ i.checkbox.fa {
       .dropdown ul.dropdown-menu li a:hover, .dropdown ul.dropdown-menu li a.selected {
         background-color: #2e6da4;
         color: #d3d3d3; }
+
+.event-view-img {
+  width: 100%; }
+
+#register-panel .form-control {
+  display: block;
+  width: 100%;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s; }
 
 /*# sourceMappingURL=app.css.map */

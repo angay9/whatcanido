@@ -30,3 +30,11 @@ $factory->define(App\Event::class, function (Faker\Generator $faker) {
         'img'   => $faker->imageUrl(800, 224),
     ];
 });
+
+$factory->define(App\Comment::class, function (Faker\Generator $faker) {
+    return [
+        'comment'   =>  $faker->sentence,
+        'event_id'  =>  null,
+        'user_id'   =>  null
+    ];
+});

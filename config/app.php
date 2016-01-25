@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'url' => 'http://localhost',
+    'url' => 'http://whatcanido.app',
 
     /*
     |--------------------------------------------------------------------------
@@ -157,6 +157,10 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /**
+         * Third party service providers
+         */
+        // Folklore\Image\ImageServiceProvider::class,
     ],
 
     /*
@@ -203,7 +207,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
         'Redis'     => Illuminate\Support\Facades\Redis::class,
-
+        // 'Image'     => Folklore\Image\Facades\Image::class
     ],
 
 ];

@@ -36,6 +36,7 @@ class EventsRepository {
     public function paginate($perPage = 20, $which = Event::ALL_EVENTS, array $with = [], array $orderBy = ['starts_at' => 'DESC'], $showOld = false)
     {
         $query = Event::with($with);
+        // $query->selectRaw('event.*, ');
 
         if ($which == Event::CREATED_BY_USER) {
             $query->where('creator_id', '=', auth()->user()->id);
@@ -45,7 +46,7 @@ class EventsRepository {
             $query->where('creator_id', '!=', auth()->user()->id);
         }
 
-        if ($orderBy) {
+        if ($orderBy && key($orderBy) != 'participants_count') {
             reset($orderBy);
             $field = key($orderBy);
             $query->orderBy($field, $orderBy[$field]);
@@ -53,7 +54,7 @@ class EventsRepository {
         if (! $showOld) {
             $query->where('starts_at', '>=', date('Y-m-d H:i:s'));        
         }
-
+        
         return $query->paginate($perPage);
     }
 

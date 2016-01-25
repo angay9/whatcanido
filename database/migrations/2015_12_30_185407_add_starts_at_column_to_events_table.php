@@ -13,7 +13,7 @@ class AddStartsAtColumnToEventsTable extends Migration
     public function up()
     {
         Schema::table('events', function (Blueprint $table) {
-            $table->datetime('starts_at');
+            $table->datetime('starts_at')->default('');
         });
     }
 

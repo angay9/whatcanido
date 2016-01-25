@@ -30,7 +30,8 @@ class StoreEventRequest extends Request
             'latitude'   =>  'required|numeric|min:0',
             'longitude'   =>  'required|numeric|min:0',
             'starts_at' =>  'required|date|after:now',
-            'place' =>  'required'
+            'place' =>  'required',
+            // 'file'  =>  'required|mimes:jpeg,png|size:4096'
         ];
     }
 

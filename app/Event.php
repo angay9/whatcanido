@@ -14,6 +14,10 @@ class Event extends Model
     
     protected $fillable = ['title', 'desc', 'lat', 'lng', 'creator_id', 'starts_at', 'place'];
 
+    protected $appends = [
+        'participantsCount'
+    ];
+
     public function isCreator(User $user)
     {
         return (int) $this->creator->id === (int)$user->id;
@@ -32,5 +36,10 @@ class Event extends Model
     public function comments()
     {
         return $this->hasMany('App\Comment', 'event_id', 'id');
+    }
+
+    public function getParticipantsCountAttribute($query)
+    {
+        return $this->participants()->count();
     }
 }

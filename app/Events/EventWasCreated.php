@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Event;
+use App\Event as EventEntity;
 use App\Events\Event as BaseEvent;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
@@ -18,7 +18,7 @@ class EventWasCreated extends BaseEvent implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct(Event $event)
+    public function __construct(EventEntity $event)
     {
         $this->event = $event;
     }

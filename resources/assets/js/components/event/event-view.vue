@@ -1,11 +1,11 @@
 <template>
     <div class="content-block">
-        <img :src="event.img" alt="" class="img-responsive">
+        <img :src="eventImg(event)" alt="" class="img-responsive event-view-img">
     </div>
     <div class="container-fluid gray-lighter-bg event-desc">
         <div class="row">
             <div class="col-md-12">
-                <avatar :src="event.creator.img" class="bordered img-responsive"></avatar>
+                <avatar :src="avatar(event.creator)" class="bordered img-responsive"></avatar>
                 <span class="name text-center">{{ event.creator.name }}</span>
             </div>
         </div>
@@ -50,7 +50,7 @@
                             >
                                 <div class="row">
                                     <div class="col-xs-2">
-                                        <avatar :src="comment.user.img" class="avatar-sm"></avatar>
+                                        <avatar :src="avatar(comment.user)" class="avatar-sm"></avatar>
                                     </div>
                                     <div class="col-xs-10">
                                         <div class="row">
@@ -86,7 +86,7 @@
                             <li class="list-item" v-for="participant in event.participants">
                                 <div class="row">
                                     <div class="col-xs-2">
-                                        <avatar :src="participant.img" class="avatar-sm"></avatar>
+                                        <avatar :src="avatar(participant)" class="avatar-sm"></avatar>
                                     </div>
                                     <div class="col-xs-10">
                                         <h4>{{ participant.name }}</h4>
@@ -214,6 +214,11 @@
             },
             editComment: function (comment, e) {
                 e.preventDefault();
+
+                if (!this.isCommentOwner(comment)) {
+                    return false;
+                }
+                
                 this.$set('comment', {
                     id: comment.id,
                     comment: comment.comment,
@@ -252,6 +257,22 @@
                 if (App.user().id != comment.user.id) {
                     this.event.comments.$remove(comment);   
                 }
+            },
+            avatar: function (user) {
+                var pat = /^http?:\/\//i;
+                var pat2 = /^https?:\/\//i;
+                if (!user.img) {
+                    return 'https://placehold.it/150x150';
+                }
+
+                if (pat.test(user.img) || pat2.test(user.img)) {
+                    return user.img;
+                }
+
+                return App.config.avatarPath + '/' + user.id + '/' + user.img;
+            },
+            eventImg: function (event) {
+                return 'https://maps.googleapis.com/maps/api/streetview?size=600x200&location=' + event.lat + ',' + event.lng;
             }
         }
     };

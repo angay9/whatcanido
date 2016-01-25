@@ -67,6 +67,7 @@ class EventsController extends Controller
     public function store(StoreEventRequest $request)
     {
         $requestData = request()->only(['title', 'description', 'latitude', 'longitude', 'starts_at', 'place']);
+
         $event = $this->repo->create([
             'title' =>  $requestData['title'],
             'desc'   =>  $requestData['description'],
@@ -177,5 +178,4 @@ class EventsController extends Controller
         
         return $this->respondSuccess();
     }
-
 }

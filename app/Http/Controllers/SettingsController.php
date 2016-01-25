@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Settings;
-use App\Http\Requests;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests;
+use App\Http\Requests\SaveAvatarRequest;
 use App\Http\Requests\SaveSettingsRequest;
+use App\Settings;
+use Illuminate\Http\Request;
 
 class SettingsController extends Controller
 {
@@ -24,7 +25,7 @@ class SettingsController extends Controller
         
         $settingsData = array_intersect_key($data, array_flip(Settings::$fields));
         $userData = array_intersect_key($data, array_flip(['address', 'email']));
-        
+
         if (! $settings) {
             $settings = new Settings(
                 array_merge(
@@ -32,6 +33,7 @@ class SettingsController extends Controller
                     ['user_id' => auth()->user()->id]
                 )
             );
+            $settings->save();
         } else {
             $settings->update($settingsData);
         }
@@ -43,6 +45,21 @@ class SettingsController extends Controller
 
     public function saveAvatar(SaveAvatarRequest $request)
     {
-        
+        $file = request()->file('file');
+        $path = config('whatcanido.paths.avatar') . '/' . auth()->user()->id . '/';
+        $oldAvatar = $path . auth()->user()->img;
+
+        if (file_exists($oldAvatar) && $oldAvatar != '' && $oldAvatar != null) {
+            unlink($oldAvatar);
+        }
+
+        $name = sha1(md5($file->getClientOriginalName() . auth()->user()->id)) . '.' . $file->guessClientExtension();
+
+        $file->move($path, $name);
+
+        auth()->user()->img = $name;
+        auth()->user()->save();
+
+        return $this->respondSuccess();
     }
 }

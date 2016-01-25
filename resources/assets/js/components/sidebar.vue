@@ -1,7 +1,7 @@
 <template>
     <div class="sidebar gray-bg">
         <div class="user-block gray-lighter-bg">
-            <avatar :src="user.img" class="bordered img-responsive"></avatar>
+            <avatar :src="user.avatar()" class="bordered img-responsive"></avatar>
             <span class="name">{{ user.name }}</span>
         </div>
         <div class="user-menu">

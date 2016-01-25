@@ -10,15 +10,13 @@
             <label for="" class="control-label">Description</label>
             <textarea name="" cols="30" rows="10" class="form-control" v-model="model.description"></textarea>
         </div>
-<!--         <div class="form-group">
-            <label for="" class="control-label">Latitude</label>
-            <input type="text" class="form-control" v-model="model.latitude">
-        </div>
+        <!-- <div class="form-group">
+            <label for="file">
+                Event Image [jpg, png]
+            </label>
+            <input type="file" name="file" id="file" class="form-control">    
+        </div> -->
         <div class="form-group">
-            <label for="" class="control-label">Longitude</label>
-            <input type="text" class="form-control" v-model="model.longitude">
-        </div>
- -->        <div class="form-group">
             <label for="" class="control-label">Starts at (yyyy-mm-dd hh:mm)</label>
             <input type="text" class="form-control date" v-model="model.starts_at">
         </div>
@@ -42,7 +40,8 @@
                     latitude: '',
                     longitude: '',
                     starts_at: '',
-                    place: ''
+                    place: '',
+                    file: ''
                 }
             };
         },
@@ -67,6 +66,7 @@
                 this.model['longitude'] = this.event.lng;
                 this.model['starts_at'] = this.event.starts_at;
                 this.model['place'] = this.event.place;
+                this.model['file'] = this.event.file;
             }
         },
         methods: {
@@ -79,6 +79,16 @@
                     method = 'patch';
                     url = '/events/' + this.event.id;
                 }
+                // var data = new FormData();
+
+                // data.append('id', this.model['id']);
+                // data.append('title', this.model['title']);
+                // data.append('description', this.model['description']);
+                // data.append('latitude', this.model['latitude']);
+                // data.append('longitude', this.model['longitude']);
+                // data.append('starts_at', this.model['starts_at']);
+                // data.append('place', this.model['place']);
+                // data.append('file', document.getElementById('file').files[0]);
 
                 this.$http[method](url, this.model).then(function (resp) {
                     App.alert('Event has succesfully been saved.');

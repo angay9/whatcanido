@@ -2,12 +2,28 @@ var App = {
     config: {
         user: null,
         csrfToken: null,
-        url: null
+        url: null,
+        avatarPath: null
     },
     store: {
         messagesStore: require('../stores/messagesStore.js')
     },
     user: function () {
+        var user = this.config.user;
+        user.avatar = function () {
+            if (!this.img) {
+                return 'https://placehold.it/150x150';
+            }
+            
+            var pat = /^http?:\/\//i;
+            var pat2 = /^https?:\/\//i;
+            if (pat.test(this.img) || pat2.test(this.img))
+            {
+                return this.img;
+            }
+
+            return App.config.avatarPath + '/' + this.id + '/' + this.img;
+        };
         return this.config.user;
     }
 };
@@ -31,6 +47,10 @@ App.alert = function (msg, type, normalizeStrings) {
     else if (msg instanceof Object && ! (msg instanceof Array)) {
         var keys = Object.keys(msg);
         messages = keys.map(function (key) {
+            if (typeof msg[key] == 'string') {
+                msg[key] = [msg[key]];   
+            }
+            
             return key + ': ' + msg[key].join('<br />'); 
         });
     };

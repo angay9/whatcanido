@@ -24,7 +24,7 @@ class SaveAvatarRequest extends Request
     public function rules()
     {
         return [
-            ''
+            'file'  =>  'image|mimes:jpg,jpeg,png|max:2048',
         ];
     }
 }

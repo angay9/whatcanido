@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Event;
+use App\Event as EventEntity;
 use App\Events\Event as BaseEvent;
 use App\User;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
@@ -31,7 +31,7 @@ class UserLeftEvent extends BaseEvent implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct(Event $event, User $user)
+    public function __construct(EventEntity $event, User $user)
     {
         $this->event = $event;
         $this->user = $user;

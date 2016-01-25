@@ -1,11 +1,11 @@
 <template>
     <div>
-        <dropdown 
+        <!-- <dropdown 
             :when-changed="onDropdownChange" 
-            :options="{'starts_at.desc': 'Most recent', 'participants.desc': 'Most popular'}" 
+            :options="{'starts_at.desc': 'Most recent', 'participants_count.desc': 'Most popular'}" 
             :value.sync="value"
         >  
-        </dropdown>
+        </dropdown> -->
         <checkbox 
             label="Old" 
             :checked.sync="showOld" 
@@ -16,7 +16,7 @@
         <li class="list-item" v-for="event in paginator.data">
             <div class="row">
                 <div class="col-xs-2">
-                    <img :src="event.img" class="img-responsive img-thumbnail">
+                    <img :src="eventImg(event)" class="img-responsive img-thumbnail">
                 </div>
                 <div class="col-xs-10">
                     <div class="row">
@@ -122,6 +122,9 @@
                 this.value = data.value;
                 this.label = data.label;
                 this.loadWithFilters();
+            },
+            eventImg: function (event) {
+                return 'https://maps.googleapis.com/maps/api/streetview?size=80x80&location=' + event.lat + ',' + event.lng;
             }
         },
     }
