@@ -10,7 +10,7 @@ class Comment extends Model
     protected $table = 'comments';
     
     protected $fillable = ['comment', 'user_id', 'event_id'];
-
+    
     public function event()
     {
         return $this->belongsTo('App\Event', 'event_id', 'id');

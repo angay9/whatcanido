@@ -53,13 +53,11 @@ class EventsControllerTest extends TestCase
     {
         $event = factory(App\Event::class)->create();
 
-
         $this->post('/events/participate', [
                 'event_id'  =>  $event->id
             ])
             ->assertResponseStatus(201)
         ;
-        
         $this->seeInDatabase('events_users', [
             'event_id'    =>  $event->id,
             'user_id'   =>  $this->user->id
@@ -77,7 +75,6 @@ class EventsControllerTest extends TestCase
             ])
             ->assertResponseStatus(201)
         ;
-        
         $this->seeInDatabase('events_users', [
             'event_id'    =>  $event->id,
             'user_id'   =>  $this->user->id
@@ -89,7 +86,6 @@ class EventsControllerTest extends TestCase
             ])
             ->assertResponseStatus(200)
         ;
-        
         $this->dontSeeInDatabase('events_users', [
             'event_id'    =>  $event->id,
             'user_id'   =>  $this->user->id
