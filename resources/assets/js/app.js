@@ -11,12 +11,12 @@ var socket = io(App.config.url + ':3000', {
   transports: ['websocket']
 });
 
-socket.on('connect', function() {
-});
 
+// socket.on('connect', function() {
+// });
 
-socket.on('disconnect', function() {
-});
+// socket.on('disconnect', function() {
+// });
 
 App.socket = socket;
 // Socket.events

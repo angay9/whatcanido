@@ -15,29 +15,28 @@
     <ul class="list" v-if="paginator.data.length > 0">
         <li class="list-item" v-for="event in paginator.data">
             <div class="row">
-                <div class="col-xs-2">
-                    <img :src="eventImg(event)" class="img-responsive img-thumbnail">
+                <div class="col-sm-3">
+                    <img :src="eventImg(event)" class="img-responsive img-thumbnail center-block m-bot-10">
                 </div>
-                <div class="col-xs-10">
-                    <div class="row">
+                <div class="col-sm-9">
+                    <div class="row m-bot-10">
                         <div class="col-xs-12">
                             <h4 class="title">
                                 {{ event.title }} <i data-toggle="tooltip" data-placement="top" title="Participating already." v-if="isParticipating(event)" class="text-primary fa fa-check-circle"></i>
                             </h4>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-xs-4">
+                    <div class="row m-bot-10">
+                        <div class="col-sm-4">
                             Starts at: {{ event.starts_at }}
                         </div>
-                        <div class="col-xs-4">
+                        <div class="col-sm-4">
                             Participants: {{ event.participants.length }}
                         </div>
-                        <div class="col-xs-4">
+                        <div class="col-sm-4">
                             Place: {{ event.place }}
                         </div>
                     </div>
-                    
                     <p>
                         {{ event.desc }}
                     </p>
