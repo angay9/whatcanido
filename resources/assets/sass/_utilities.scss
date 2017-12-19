@@ -1,0 +1,73 @@
+
+.m-left-5 {
+    margin-left: 5px;
+}
+.m-right-5 {
+    margin-right: 5px;
+}
+.m-left-10 {
+    margin-left: 10px;
+}
+.m-right-10 {
+    margin-right: 10px;
+}
+
+.m-top-10 {
+    margin-top: 10px;
+}
+.m-bot-10 {
+    margin-bottom: 10px;
+}
+.m-top-15 {
+    margin-top: 15px;
+}
+.m-bot-15 {
+    margin-bottom: 15px;
+}
+
+
+.m-top-20 {
+    margin-top: 20px;
+}
+.m-bot-20 {
+    margin-bottom: 20px;
+}
+
+.m-top-40 {
+    margin-top: 40px;
+}
+.m-bot-40 {
+    margin-bottom: 40px;
+}
+.text-gray {
+    color: $color-gray;
+}
+.va-bottom {
+    vertical-align: bottom;
+}
+
+// Helpers
+.cursor-pointer {
+    cursor: pointer;
+}
+.bordered {
+    border: 5px solid rgba(255, 255, 255, .15);
+}
+.font-bold {
+    font-weight: 600;
+}
+
+.bg-default {
+    background-color: $color-lighter;
+}
+
+
+.text-default {
+    color: $color-lighter;
+    &:hover {
+        color: $color-lighter;        
+    }
+    &:focus {
+        color: $color-lighter;        
+    }
+}

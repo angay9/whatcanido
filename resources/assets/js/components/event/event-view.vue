@@ -49,23 +49,22 @@
                                 v-for="comment in event.comments" 
                             >
                                 <div class="row">
-                                    <div class="col-xs-2">
+                                    <div class="col-xs-4 col-sm-2">
                                         <avatar :src="avatar(comment.user)" class="avatar-sm"></avatar>
                                     </div>
-                                    <div class="col-xs-10">
+                                    <div class="col-xs-8 col-sm-10">
                                         <div class="row">
-                                            <div class="col-xs-11" :class="{'cursor-pointer': isCommentOwner(comment)}" @click="editComment(comment, $event)">
+                                            <div class="col-xs-12" :class="{'cursor-pointer': isCommentOwner(comment)}" @click="editComment(comment, $event)">
+                                                <a href="#" v-if="isCommentOwner(comment)" class="close text-default m-right-10 pull-right" @click="deleteComment(comment, $event)">
+                                                    <i class="fa fa-close"></i>
+                                                </a>
+                                                
                                                 <span class="m-right-10 font-bold">{{ comment.user.name }}</span>
                                                 <div>
                                                     <em>{{ comment.created_at }}</em>
                                                 </div>
                                                 <p>{{ comment.comment }}</p>
-                                            </div>
-
-                                            <div class="col-xs-1">
-                                                <a href="#" v-if="isCommentOwner(comment)" class="close text-default m-right-10" @click="deleteComment(comment, $event)">
-                                                    <i class="fa fa-close"></i>
-                                                </a>
+                                                
                                             </div>
                                         </div>
                                     </div>

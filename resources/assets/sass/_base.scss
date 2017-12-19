@@ -1,0 +1,29 @@
+// Reset
+html, body {
+    // height: 100%;
+}
+ul {
+    padding: 0;
+    margin: 0;
+    li {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+}
+
+
+input[type="text"].form-control,
+input[type="number"].form-control,
+textarea.form-control,
+input[type="file"].form-control,
+input[type="text"].form-control:focus,
+input[type="number"].form-control:focus,
+textarea.form-control:focus {
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    border-bottom: 1px solid $color-gray;
+    outline: 0 none;
+    box-shadow: none;
+}

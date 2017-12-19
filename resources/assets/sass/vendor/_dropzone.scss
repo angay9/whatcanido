@@ -1,0 +1,18 @@
+.dropzone {
+    border: 2px dashed #d3d3d3;
+    line-height: 150px;
+    overflow-y: auto;
+}
+.dropzone.active {
+    border-color: #737373;
+}
+.dropzone.active .placeholder {
+    color: #737373;
+}
+.dropzone .placeholder {
+    color: #d3d3d3;
+}
+.dropzone.has-files {
+    height: 200px;
+    line-height: 16px;
+}
