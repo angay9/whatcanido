@@ -124,7 +124,7 @@
                 this.loadWithFilters();
             },
             eventImg: function (event) {
-                return 'https://maps.googleapis.com/maps/api/streetview?size=80x80&location=' + event.lat + ',' + event.lng;
+                return `https://maps.googleapis.com/maps/api/streetview?size=80x80&location=${event.lat},${event.lng}&key=${App.config.googleMapsApiKey}`;
             }
         },
     }

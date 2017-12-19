@@ -6,7 +6,11 @@ window.App = App;
 
 // Socket.io
 var io = require('socket.io-client');
-var socket = io(App.config.url + ':3000');
+// var socket = io(App.config.url + ':3000');
+var socket = io(App.config.url + ':3000', {
+  transports: ['websocket']
+});
+
 socket.on('connect', function() {
 });
 
@@ -17,6 +21,7 @@ socket.on('disconnect', function() {
 App.socket = socket;
 // Socket.events
 var Events = require('./events/events.js');
+
 Events.observe();
 
 // Vue js

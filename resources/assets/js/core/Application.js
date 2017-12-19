@@ -3,7 +3,8 @@ var App = {
         user: null,
         csrfToken: null,
         url: null,
-        avatarPath: null
+        avatarPath: null,
+        googleMapsApiKey: null
     },
     store: {
         messagesStore: require('../stores/messagesStore.js')

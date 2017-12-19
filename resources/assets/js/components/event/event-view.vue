@@ -272,7 +272,7 @@
                 return App.config.avatarPath + '/' + user.id + '/' + user.img;
             },
             eventImg: function (event) {
-                return 'https://maps.googleapis.com/maps/api/streetview?size=600x200&location=' + event.lat + ',' + event.lng;
+                return `https://maps.googleapis.com/maps/api/streetview?size=600x200&location=${event.lat},${event.lng}&key=${App.config.googleMapsApiKey}`;
             }
         }
     };

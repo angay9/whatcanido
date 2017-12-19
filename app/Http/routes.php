@@ -10,6 +10,9 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+
+// die(bcrypt('password'));
+
 Route::get('/', function () {
     return redirect()->to('/events');
 });

@@ -4,6 +4,7 @@
  */
 module.exports = {
     observe: function () {
+
         App.socket.on('whatcanido-channel:App\\Events\\EventWasCreated', this.onEventWasCreated);
         App.socket.on('whatcanido-channel:App\\Events\\UserParticipatedInEvent', this.onUserParticipated);
         App.socket.on('whatcanido-channel:App\\Events\\UserLeftEvent', this.onUserLeft);
